@@ -1,17 +1,21 @@
-name: "Hello Actions"
-description: "Greet someone"
-author: "octocat@github.com"
+name: 'My Adding Action'
+description: 'This action will demonstrate how GH Actions work'
 
 inputs:
-  MY_NAME:
-    description: "Who to greet"
+  first_number:
+    descrption: 'Enter your first number:'
     required: true
-    default: "World"
+  second_number:
+    descrption: 'Enter your second number:'
+    required: true
+
+outpus:
+  SUM:
+    description: 'The sum of the numbers'
 
 runs:
-  using: "docker"
-  image: "Dockerfile"
-
-branding:
-  icon: "mic"
-  color: "purple"
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.first_number }}
+    - ${{ inputs.second_number }}
