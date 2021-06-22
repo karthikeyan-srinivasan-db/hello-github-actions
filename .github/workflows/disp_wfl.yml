@@ -1,0 +1,41 @@
+name: ManualWorkflow
+on:
+  workflow_dispatch:
+    inputs:
+      first_number:
+        descrption: 'Enter your first number: '
+        required: true
+      second_number:
+        descrption: 'Enter your second number:'
+        required: true
+
+
+jobs:
+  my-job:
+    name: This is my great first job
+    runs-on: ubuntu-20.04
+    steps:
+      - name: my-step
+        run: echo "Hello World!"
+      - name: my-second-step
+        run: |
+          echo "Your first number is ${{ github.event.inputs.first_number }}!"
+          echo "Your second number is ${{ github.event.inputs.second_number }}!"
+
+  my-second-job:
+    name: Here we will use custom action
+    needs: [my-job]
+    runs-on: ubuntu-20.04
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v2
+
+      - name: action_demo
+        uses: ./actions
+        id: numbers
+        with:
+          first_number: ${{ github.event.inputs.first_number }}
+          second_number: ${{ github.event.inputs.second_number }}
+
+      - name: Demonstrate output
+        run: echo "Your sum of numbers is ${{ steps.numbers.outputs.sum }}"
