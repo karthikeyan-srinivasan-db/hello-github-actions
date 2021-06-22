@@ -1,5 +1,7 @@
-FROM debian:9.5-slim
+FROM alpine:3.12
 
-ADD entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
-ENTRYPOINT ["/entrypoint.sh"]
+COPY run.sh /run.sh
+
+RUN chmod +x run.sh
+
+ENTRYPOINT [ "/run.sh" ]
