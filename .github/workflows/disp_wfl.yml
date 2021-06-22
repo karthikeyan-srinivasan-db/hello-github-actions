@@ -31,7 +31,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: action_demo
-        uses: ./actions
+        uses: ./actions-a
         id: numbers
         with:
           first_number: ${{ github.event.inputs.first_number }}
